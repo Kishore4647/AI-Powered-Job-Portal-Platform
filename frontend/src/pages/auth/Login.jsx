@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import AuthLayout from "../../components/AuthLayout";
 
 export default function Login() {
   const { login } = useAuth();
@@ -24,14 +25,16 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-page">
-      <h1>Welcome back</h1>
-      <p className="subtitle">Log in to your AI JobPortal account</p>
-      <form className="card" onSubmit={handleSubmit}>
+    <AuthLayout>
+      <span className="auth-mobile-brand">Job Assist</span>
+      <h2 className="auth-form-title">Log in</h2>
+      <p className="auth-form-subtitle">Pick up right where you left off.</p>
+
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Email</label>
           <input
-            type="email" required className="form-control"
+            type="email" required autoFocus className="form-control"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
@@ -49,9 +52,10 @@ export default function Login() {
           {loading ? "Logging in..." : "Log In"}
         </button>
       </form>
-      <p style={{ marginTop: 16, fontSize: "0.9rem" }}>
-        Don't have an account? <Link to="/register">Sign up</Link>
+
+      <p className="auth-switch">
+        New to Job Assist? <Link to="/register">Create an account</Link>
       </p>
-    </div>
+    </AuthLayout>
   );
 }

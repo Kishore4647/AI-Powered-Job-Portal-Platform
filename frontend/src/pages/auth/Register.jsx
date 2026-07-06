@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import AuthLayout from "../../components/AuthLayout";
 
 export default function Register() {
   const { register, login } = useAuth();
@@ -28,18 +29,19 @@ export default function Register() {
   };
 
   return (
-    <div className="auth-page">
-      <h1>Create your account</h1>
-      <p className="subtitle">Join as a candidate or recruiter</p>
-      <form className="card" onSubmit={handleSubmit}>
+    <AuthLayout>
+      <span className="auth-mobile-brand">Job Assist</span>
+      <h2 className="auth-form-title">Create your account</h2>
+      <p className="auth-form-subtitle">Join as a candidate or recruiter.</p>
+
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>I am a...</label>
-          <div style={{ display: "flex", gap: 10 }}>
+          <div className="role-toggle">
             {["CANDIDATE", "RECRUITER"].map((r) => (
               <button
                 type="button" key={r}
                 className={`btn ${form.role === r ? "btn-primary" : "btn-secondary"}`}
-                style={{ flex: 1 }}
                 onClick={() => setForm({ ...form, role: r })}
               >
                 {r === "CANDIDATE" ? "Candidate" : "Recruiter"}
@@ -74,9 +76,10 @@ export default function Register() {
           {loading ? "Creating account..." : "Sign Up"}
         </button>
       </form>
-      <p style={{ marginTop: 16, fontSize: "0.9rem" }}>
+
+      <p className="auth-switch">
         Already have an account? <Link to="/login">Log in</Link>
       </p>
-    </div>
+    </AuthLayout>
   );
 }

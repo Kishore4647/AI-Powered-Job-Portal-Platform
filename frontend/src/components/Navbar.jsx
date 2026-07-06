@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="container navbar-inner">
-        <span className="brand">AI JobPortal</span>
+        <span className="brand"><span className="brand-mark">JA</span>Job Assist</span>
         <div className="nav-links">
           {links.map((l) => (
             <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? "active" : "")}>
